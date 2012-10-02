@@ -1,0 +1,6 @@
+XTD Commons Library
+Copyright 2012 XTD Studios Ltd.
+
+This product includes software developed at
+XTD Studios Ltd (http://www.xtdstudios.com/).
+

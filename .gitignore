@@ -1,9 +1,19 @@
 # Build and Release Folders
+<<<<<<< HEAD
+bin/
+=======
+>>>>>>> 3512477d5187c1b809872c930b19e94b3cb9811b
 bin-debug/
 bin-release/
 
 # Project property files
 .actionScriptProperties
 .flexProperties
+<<<<<<< HEAD
+.flexLibProperties
 .settings/
 .project
+=======
+.settings/
+.project
+>>>>>>> 3512477d5187c1b809872c930b19e94b3cb9811b
