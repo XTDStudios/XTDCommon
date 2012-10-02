@@ -18,6 +18,7 @@ package com.xtdstudios.common
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.filters.BitmapFilter;
 	import flash.filters.DropShadowFilter;
@@ -64,21 +65,28 @@ package com.xtdstudios.common
 		
 		private static function doGetBoundsRectWithChidren(dispObj:DisplayObject, targetCoordinateSpace:DisplayObject):Rectangle
 		{
-			var children		: Array = [];
-			var child			: DisplayObject;
-			var dispObjCont 	: DisplayObjectContainer = dispObj as DisplayObjectContainer;
-			var childrensRect	: Rectangle = new Rectangle();
-			
+			var children			: Array = [];
+			var child				: DisplayObject;
+			var dispObjCont 		: DisplayObjectContainer = dispObj as DisplayObjectContainer;
+			var childrensRect		: Rectangle = new Rectangle();
+			var i					: int;
+			var asMovieClip 		: MovieClip = dispObj as MovieClip;
+			var dontRemoveChildren	: Boolean = (asMovieClip && asMovieClip.totalFrames>=1);
+				
 			// remove and draw rect for all children
-			if (dispObjCont)
+			if (dispObjCont && dispObjCont.filters.length==0)
 			{
-				while (dispObjCont.filters.length==0 && dispObjCont.numChildren>0)
+				for (i=0; i<dispObjCont.numChildren; i++)
 				{
-					child = dispObjCont.getChildAt(0);
+					child = dispObjCont.getChildAt(i);
 					childrensRect = childrensRect.union(doGetBoundsRectWithChidren(child, targetCoordinateSpace));
 					childrensRect = childrensRect.union(getBoundsWithEffects(child, targetCoordinateSpace));
-					dispObjCont.removeChildAt(0);
-					children.push(child);
+					
+					if (dontRemoveChildren==false)
+					{
+						dispObjCont.removeChildAt(0);
+						children.push(child);
+					}
 				}
 			}
 			
@@ -181,9 +189,13 @@ package com.xtdstudios.common
 		{
 			var dispObjContainer : DisplayObjectContainer;
 			dispObjContainer = dispObj as DisplayObjectContainer;
-			
+
 			if  (dispObjContainer!=null)
 			{
+				var movieClip : MovieClip = dispObj as MovieClip;
+				if (movieClip)
+					movieClip.gotoAndStop(1);
+				
 				for (var i:int=0; i<dispObjContainer.numChildren; i++)
 				{
 					scaleEffects(dispObjContainer.getChildAt(i), scaleX*dispObjContainer.scaleX, scaleY*dispObjContainer.scaleY);
