@@ -72,6 +72,7 @@ package com.xtdstudios.common.threads
 			
 			if (m_runnable.isComplete()) 
 			{
+				m_timer.stop();
 				dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, m_runnable.getProgress(), m_runnable.getTotal()));
 				dispatchEvent(new Event(Event.COMPLETE,false,false));
 				destroy();
