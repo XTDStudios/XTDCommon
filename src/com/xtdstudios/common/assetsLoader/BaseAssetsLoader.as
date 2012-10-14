@@ -79,11 +79,6 @@ package com.xtdstudios.common.assetsLoader
 			// override
 		}
 		
-		public function get applicationDomain():ApplicationDomain
-		{
-			return m_applicationDomain;
-		}
-		
 		private function onSecurityError(event:SecurityErrorEvent):void
 		{
 			dispatchEvent(event);
