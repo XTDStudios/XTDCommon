@@ -21,6 +21,7 @@ package com.xtdstudios.common.assetsLoader
 	public interface IAssetsLoader extends IEventDispatcher
 	{
 		function getAssetClass(symbol:String):Class;
+		function getAvailableAssetsNames():Vector.<String>;
 		function initializeAllAssets():void;
 		function get assetsReady():Boolean;
 		function get loadingProgress():Number;

@@ -151,9 +151,14 @@ package com.xtdstudios.common.assetsLoader
 		
 		public function get loadingProgress():Number
 		{
-			return m_assetsLoadingProgress; // allways 100% (this is Embedded!)
+			return m_assetsLoadingProgress;
 		}
 		
+		public function getAvailableAssetsNames():Vector.<String>
+		{
+			return m_applicationDomain.getQualifiedDefinitionNames();
+		}
+
 		public function getAssetClass(symbol:String):Class
 		{
 			return m_applicationDomain.getDefinition(symbol) as Class;

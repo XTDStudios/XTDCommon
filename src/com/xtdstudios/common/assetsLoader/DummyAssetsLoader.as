@@ -22,6 +22,11 @@ package com.xtdstudios.common.assetsLoader
 			return null;
 		}
 		
+		public function getAvailableAssetsNames():Vector.<String>
+		{
+			return null;
+		}
+		
 		public function initializeAllAssets():void
 		{
 			dispatchEvent(new Event(Event.COMPLETE));
