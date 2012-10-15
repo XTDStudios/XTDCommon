@@ -20,11 +20,9 @@ package com.xtdstudios.common.threads
 
 		function process():void;
 
-		function isComplete():Boolean;
-		
-		function getTotal():int;
-
-		function getProgress():int;
+		function get isComplete():Boolean;
+		function get total():int;
+		function get progress():int;
 	}
 	
 }

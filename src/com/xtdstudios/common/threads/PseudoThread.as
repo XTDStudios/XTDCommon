@@ -17,90 +17,59 @@ package com.xtdstudios.common.threads
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.IEventDispatcher;
 	import flash.events.ProgressEvent;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	import flash.utils.getTimer;
 	
-	public class PseudoThread extends EventDispatcher {
+	public class PseudoThread extends BasePseudoThread implements IEventDispatcher {
 		
-		private var m_timer				: Timer;
-		private var m_targetFPS			: int;
-		private var m_timeToSpend		: Number;
-		private var m_avgTimeSpent		: Number;
-		private var m_countExecutions	: int;
-		private var m_runnable			: IRunnable;
-		private var m_isRunning			: Boolean;
+		private var m_eventDispatcher  : EventDispatcher;
 		
-		public function PseudoThread(runnable:IRunnable, targetFPS:int = 60) {
-			m_isRunning = false;
-			m_runnable = runnable;
-			m_targetFPS = targetFPS;
-			m_timeToSpend = 1000/m_targetFPS;
-			m_avgTimeSpent = 0;
-			m_countExecutions = 0;
-			m_timer = new Timer(m_timeToSpend);
-		}
-		
-		public function destroy():void 
+		public function PseudoThread(runnable:IRunnable, targetFPS:int = 60) 
 		{
-			forceStop();
-			m_runnable = null;
-			m_timer = null;
+			m_eventDispatcher = new EventDispatcher();
+			super(runnable, targetFPS);
 		}
 		
-		private function onTimer(e:TimerEvent):void 
+		override protected function notifyProgress(progress:int, total:int):void
 		{
-			var maxTime		: Number = getTimer()+m_timeToSpend-(m_avgTimeSpent*2);
-			var startTime 	: Number;
-			var endTime 	: Number;
-			var timeTaken 	: Number;
-			
-			do {
-				startTime = getTimer();
-				m_runnable.process();
-				m_countExecutions++;
-				endTime = getTimer();
-				timeTaken = endTime - startTime;
-				if (m_countExecutions>1)
-					m_avgTimeSpent = (m_avgTimeSpent + timeTaken)/2;
-				else
-					m_avgTimeSpent = timeTaken;
-				
-				//trace(maxTime, startTime, endTime, timeTaken, m_avgTimeSpent);
-			} while (m_runnable.isComplete()==false && endTime<maxTime);
-			
-			if (m_runnable.isComplete()) 
-			{
-				forceStop();
-				dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, m_runnable.getProgress(), m_runnable.getTotal()));
-				dispatchEvent(new Event(Event.COMPLETE,false,false));
-			} 
-			else
-			{
-				dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, m_runnable.getProgress(), m_runnable.getTotal()));
-			}
+			dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, progress, total));
 		}
 		
-		public function start():void 
+		override protected function notifyCompletion(progress:int, total:int):void
 		{
-			if (m_isRunning)
-				return;
-				
-			m_isRunning = true;
-			m_timer.addEventListener(TimerEvent.TIMER,onTimer);
-			m_timer.start(); 
+			dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, progress, total));
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
-		public function forceStop():void 
+		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
 		{
-			if (m_isRunning==false)
-				return;
-				
-			m_isRunning = false;
-			m_timer.stop();
-			m_timer.removeEventListener(TimerEvent.TIMER,onTimer);
+			m_eventDispatcher.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
+		public function dispatchEvent(event:Event):Boolean
+		{
+			return m_eventDispatcher.dispatchEvent(event);
+		}
+		
+		public function hasEventListener(type:String):Boolean
+		{
+			return m_eventDispatcher.hasEventListener(type);
+		}
+		
+		public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
+		{
+			return m_eventDispatcher.removeEventListener(type, listener, useCapture);
+		}
+		
+		public function willTrigger(type:String):Boolean
+		{
+			return m_eventDispatcher.willTrigger(type);
+		}
+		
+		override public function destroy():void 
+		{
+			m_eventDispatcher = null;
+			super.destroy();
+		}
 	}
 }
