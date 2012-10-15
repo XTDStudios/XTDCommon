@@ -30,21 +30,21 @@ package com.xtdstudios.common.threads
 		private var m_avgTimeSpent		: Number;
 		private var m_countExecutions	: int;
 		private var m_runnable			: IRunnable;
+		private var m_isRunning			: Boolean;
 		
 		public function PseudoThread(runnable:IRunnable, targetFPS:int = 60) {
+			m_isRunning = false;
 			m_runnable = runnable;
 			m_targetFPS = targetFPS;
 			m_timeToSpend = 1000/m_targetFPS;
 			m_avgTimeSpent = 0;
 			m_countExecutions = 0;
 			m_timer = new Timer(m_timeToSpend);
-			m_timer.addEventListener(TimerEvent.TIMER,onTimer);
 		}
 		
 		public function destroy():void 
 		{
-			m_timer.stop();
-			m_timer.removeEventListener(TimerEvent.TIMER,onTimer);
+			forceStop();
 			m_runnable = null;
 			m_timer = null;
 		}
@@ -72,10 +72,9 @@ package com.xtdstudios.common.threads
 			
 			if (m_runnable.isComplete()) 
 			{
-				m_timer.stop();
+				forceStop();
 				dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, m_runnable.getProgress(), m_runnable.getTotal()));
 				dispatchEvent(new Event(Event.COMPLETE,false,false));
-				destroy();
 			} 
 			else
 			{
@@ -85,7 +84,22 @@ package com.xtdstudios.common.threads
 		
 		public function start():void 
 		{
+			if (m_isRunning)
+				return;
+				
+			m_isRunning = true;
+			m_timer.addEventListener(TimerEvent.TIMER,onTimer);
 			m_timer.start(); 
+		}
+		
+		public function forceStop():void 
+		{
+			if (m_isRunning==false)
+				return;
+				
+			m_isRunning = false;
+			m_timer.stop();
+			m_timer.removeEventListener(TimerEvent.TIMER,onTimer);
 		}
 		
 	}
