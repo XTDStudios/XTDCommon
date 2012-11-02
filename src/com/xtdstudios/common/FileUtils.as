@@ -21,34 +21,61 @@ package com.xtdstudios.common
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.geom.Rectangle;
+	import flash.system.Capabilities;
 	import flash.utils.ByteArray;
 
 	public class FileUtils
 	{
-		//TODO: Add constant to be set depends on the device type (CONFIG::) 
-		private const m_cacheDir : File = new File(File.applicationStorageDirectory.nativePath+"/../../cache");
-		//private const DEVICE_CACHE_PATH : String = new File(File.applicationDirectory.nativePath +"/\.\./Library/Caches");
+		private static var m_cacheDir 	: File;
+		private static var m_tempDir 	: File;
 		
-		//TODO: Add constant to be set depends on the device type (CONFIG::) - 
-		//TODO: chech the right pos per device
-		private const m_tempDir : File = new File(File.applicationDirectory.nativePath +"/\.\./tmp");
-		
-		public function FileUtils()
+		public static function getCacheDir():File
 		{
-		}
-		
-		public function getCacheDir():File
-		{
+			if (!m_cacheDir)
+			{
+				var os : String = Capabilities.os.toLowerCase();
+				
+				if (os.indexOf("windows") >= 0)		// windows
+				{
+					m_cacheDir = File.applicationStorageDirectory;
+				}
+				else if (os.indexOf("mac") >= 0)	// Macintosh
+				{
+					m_cacheDir = File.applicationStorageDirectory;
+				} 
+				else if (os.indexOf("linux") >= 0)	// Android
+				{
+					m_cacheDir = File.applicationStorageDirectory;
+				}
+				else if (os.indexOf("iphone") >= 0)	// iPhone/iPad
+				{
+					m_cacheDir = new File(File.applicationDirectory.nativePath +"/\.\./Library/Caches");
+				}
+			}
+			
 			return m_cacheDir;
 		}
 		
-		
-		public function getTempDir():File
+		public static function getTempDir():File
 		{
+			if (!m_tempDir)
+			{
+				var os : String = Capabilities.os.toLowerCase();
+				
+				if (os.indexOf("iphone") >= 0)	// iPhone/iPad
+				{
+					m_tempDir = new File(File.applicationDirectory.nativePath +"/\.\./tmp");
+				}
+				else
+				{
+					m_tempDir = File.createTempDirectory();
+				}
+			}
+			
 			return m_tempDir;
 		}
 		
-		public function saveToPNGFile(bitmapData:BitmapData, filePath:String):void
+		public static function saveToPNGFile(bitmapData:BitmapData, filePath:String):void
 		{
 			var imgByteArray	: ByteArray;
 			imgByteArray = new ByteArray();
