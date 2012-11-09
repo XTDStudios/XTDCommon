@@ -35,6 +35,8 @@ package com.xtdstudios.common.assetsLoader
 		
 		override public function initializeAllAssets():void
 		{
+			super.initializeAllAssets();
+			
 			// the loader
 			m_countCompelted = 0;
 			m_assetsReady = false;

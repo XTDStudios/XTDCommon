@@ -25,6 +25,7 @@ package com.xtdstudios.common.assetsLoader
 		function initializeAllAssets():void;
 		function get assetsReady():Boolean;
 		function get loadingProgress():Number;
+		function get inProgress():Boolean;
 		
 		function dispose():void;
 	}

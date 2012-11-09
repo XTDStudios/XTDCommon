@@ -32,6 +32,11 @@ package com.xtdstudios.common.assetsLoader
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
+		public function get inProgress():Boolean
+		{
+			return false;
+		}
+		
 		public function get assetsReady():Boolean
 		{
 			return true;

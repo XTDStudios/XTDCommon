@@ -16,8 +16,18 @@ package com.xtdstudios.common.assetsFactory
 		{
 			if (m_applicationDomain)
 			{
-				var cls : Class = m_applicationDomain.getDefinition(symbol) as Class;
-				return new cls;
+				trace(m_applicationDomain.getQualifiedDefinitionNames());
+				
+				var definition : Object = m_applicationDomain.getDefinition(symbol);
+				if (definition is Class)
+				{
+					var cls : Class = m_applicationDomain.getDefinition(symbol) as Class;
+					return new cls;
+				}
+				else
+				{
+					return definition;
+				}
 			}
 			else
 			{

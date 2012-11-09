@@ -32,7 +32,8 @@ package com.xtdstudios.common.assetsLoader
 	public class BaseAssetsLoader extends EventDispatcher implements IAssetsLoader
 	{
 		private var m_loaders					: Vector.<Loader>;
-
+		private var m_inProgress				: Boolean;
+		
 		protected var m_applicationDomain 		: ApplicationDomain;
 		protected var m_assetsReady				: Boolean;
 		protected var m_assetsLoadingProgress	: Number;
@@ -42,10 +43,17 @@ package com.xtdstudios.common.assetsLoader
 		{
 			m_applicationDomain = new ApplicationDomain();
 			m_assetsLoadingProgress = 0.0;
+			m_inProgress = false;
+			m_assetsReady = false;
 			m_loaders = new Vector.<Loader>;
 			super();
 		}		
 		
+		public function get inProgress():Boolean
+		{
+			return m_inProgress;
+		}
+
 		protected function removeLoader(loader:Loader):void
 		{
 			loader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, onProgress);
@@ -77,6 +85,7 @@ package com.xtdstudios.common.assetsLoader
 		public function initializeAllAssets():void
 		{
 			// override
+			m_inProgress = true;
 		}
 		
 		private function onSecurityError(event:SecurityErrorEvent):void
@@ -113,6 +122,7 @@ package com.xtdstudios.common.assetsLoader
 				
 				// we aer now ready
 				m_assetsReady = true;
+				m_inProgress = false;
 				m_assetsLoadingProgress = 1.0;
 				dispatchEvent(new Event(Event.COMPLETE));
 			}
