@@ -17,8 +17,6 @@ package com.xtdstudios.common
 {
 	import flash.utils.Dictionary;
 	
-	import mx.utils.StringUtil;
-
 	public final class XMLUtils
 	{
 		
@@ -90,8 +88,10 @@ package com.xtdstudios.common
 			var attrValue 	: String = xml.attribute(xmlAttr);
 			if (attrValue!=null && attrValue!="")
 			{
-				var trimArrayElements:String = StringUtil.trimArrayElements(attrValue,",");
-				var split:Array = trimArrayElements.split(",");
+				//TODO:  Fix to support spaces 
+				//var trimArrayElements:String = StringUtil.trimArrayElements(attrValue,",");
+				//var split:Array = trimArrayElements.split(",");
+				var split:Array = attrValue.split(",");
 				for each (var item: String in split) 
 				{
 					dic[item] = [item];
