@@ -1,19 +1,13 @@
 # Build and Release Folders
-<<<<<<< HEAD
 bin/
-=======
->>>>>>> 3512477d5187c1b809872c930b19e94b3cb9811b
 bin-debug/
 bin-release/
 
-# Project property files
-.actionScriptProperties
-.flexProperties
-<<<<<<< HEAD
-.flexLibProperties
+# Other files and folders
 .settings/
-.project
-=======
-.settings/
-.project
->>>>>>> 3512477d5187c1b809872c930b19e94b3cb9811b
+
+*.apk
+
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
