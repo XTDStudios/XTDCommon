@@ -12,6 +12,20 @@ package com.xtdstudios.common.assetsFactory
 			m_applicationDomain = applicationDomain;
 		}
 		
+		public function getAssetClass(className:String):Class
+		{
+			if (m_applicationDomain)
+			{
+				var classDef : Class = m_applicationDomain.getDefinition(className) as Class;
+				return classDef;
+			}
+			else
+			{
+				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromApplicationDomain");
+				return null;
+			}
+		}
+		
 		public function createAsset(symbol:String):Object
 		{
 			if (m_applicationDomain)
@@ -21,7 +35,7 @@ package com.xtdstudios.common.assetsFactory
 				var definition : Object = m_applicationDomain.getDefinition(symbol);
 				if (definition is Class)
 				{
-					var cls : Class = m_applicationDomain.getDefinition(symbol) as Class;
+					var cls : Class = definition as Class;
 					return new cls;
 				}
 				else

@@ -13,12 +13,34 @@ package com.xtdstudios.common.assetsFactory
 			m_assetsLoader = assetsLoader;
 		}
 		
+		public function getAssetClass(className:String):Class
+		{
+			if (m_assetsLoader)
+			{
+				var classDef : Class = m_assetsLoader.getAssetClass(className);
+				return classDef;
+			}
+			else
+			{
+				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromAssetsLoader");
+				return null;
+			}
+		}
+		
 		public function createAsset(symbol:String):Object
 		{
 			if (m_assetsLoader)
 			{
-				var cls : Class = m_assetsLoader.getAssetClass(symbol);
-				return new cls;
+				var definition : Object = m_assetsLoader.getAssetClass(symbol);
+				if (definition is Class)
+				{
+					var cls : Class = definition as Class;
+					return new cls;
+				}
+				else
+				{
+					return definition;
+				}
 			}
 			else
 			{
