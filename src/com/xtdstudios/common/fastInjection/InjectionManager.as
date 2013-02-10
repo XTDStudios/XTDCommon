@@ -30,11 +30,20 @@ package com.xtdstudios.common.fastInjection
 			if (injectables)
 			{
 				var injectableData:InjectableData;
+				
+				// sign the injectables
 				for each(injectableData in injectables)
 				{
-					addInjectable(injectableData.injectableObj, injectableData.injectedAs, false);
+					signInjectable(injectableData.injectableObj, injectableData.injectedAs);
 				}
 				
+				// process
+				for each(injectableData in injectables)
+				{
+					process(injectableData.injectableObj, false);
+				}
+				
+				// post construct
 				for each(injectableData in injectables)
 				{
 					if (injectableData.injectableObj.hasOwnProperty("postConstruct"))
@@ -66,13 +75,21 @@ package com.xtdstudios.common.fastInjection
 			}
 		}
 		
-		public function addInjectable(injectable:Object, injectedAs:String, callPostConstruct:Boolean=true):void
+		private function signInjectable(injectable:Object, injectedAs:String):Boolean
 		{
 			if (m_injectables[injectedAs]==null)
 			{
 				m_injectables[injectedAs] = injectable;
-				process(injectable, callPostConstruct)
+				return true;				
 			}
+			
+			return false;
+		}
+		
+		public function addInjectable(injectable:Object, injectedAs:String, callPostConstruct:Boolean=true):void
+		{
+			if (signInjectable(injectable, injectedAs))
+				process(injectable, callPostConstruct)
 		}
 		
 		public function removeInjectable(injectedAs:String):void
