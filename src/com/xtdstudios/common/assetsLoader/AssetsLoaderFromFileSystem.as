@@ -54,13 +54,13 @@ package com.xtdstudios.common.assetsLoader
 		
 		override public function initializeAllAssets():void
 		{
-			super.initializeAllAssets();
-
 			// load the files
 			for each(var filePath:String in m_filePaths)
 			{
 				m_byteArrays.push(loadFromFile(filePath));
 			}
+
+			super.initializeAllAssets();
 		}
 		
 	}

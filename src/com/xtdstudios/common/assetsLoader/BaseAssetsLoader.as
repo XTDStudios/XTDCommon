@@ -18,16 +18,10 @@ package com.xtdstudios.common.assetsLoader
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.HTTPStatusEvent;
-	import flash.events.IEventDispatcher;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
-	import flash.system.LoaderContext;
-	import flash.system.Security;
-	import flash.system.SecurityDomain;
 	
 	public class BaseAssetsLoader extends EventDispatcher implements IAssetsLoader
 	{
@@ -41,7 +35,7 @@ package com.xtdstudios.common.assetsLoader
 		
 		public function BaseAssetsLoader()
 		{
-			m_applicationDomain = new ApplicationDomain();
+			m_applicationDomain = ApplicationDomain.currentDomain;
 			m_assetsLoadingProgress = 0.0;
 			m_inProgress = false;
 			m_assetsReady = false;

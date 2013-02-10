@@ -16,10 +16,6 @@ limitations under the License.
 package com.xtdstudios.common.assetsLoader
 {
 	import flash.display.Loader;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.ProgressEvent;
-	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
 
