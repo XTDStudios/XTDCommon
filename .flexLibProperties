@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses/>
+  <includeClasses>
+    <classEntry path="com.xtdstudios.logger.SimpleLoggerConfiguration"/>
+    <classEntry path="com.xtdstudios.logger.Logger"/>
+    <classEntry path="com.xtdstudios.logger.LoggerConfiguration"/>
+    <classEntry path="com.xtdstudios.logger.TraceLogger"/>
+    <classEntry path="com.xtdstudios.logger.LoggerLevel"/>
+    <classEntry path="com.xtdstudios.cache.ItemsLimitCachePolicy"/>
+    <classEntry path="com.xtdstudios.cache.CacheManagerEvent"/>
+    <classEntry path="com.xtdstudios.cache.CacheManager"/>
+    <classEntry path="com.xtdstudios.cache.MemoryLimitCachePolicy"/>
+    <classEntry path="com.xtdstudios.cache.ItemMemorySize"/>
+    <classEntry path="com.xtdstudios.cache.CachePolicy"/>
+  </includeClasses>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>
