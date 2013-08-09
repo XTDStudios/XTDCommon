@@ -1,5 +1,8 @@
 package com.xtdstudios.cache
 {
+	import com.xtdstudios.logger.Logger;
+	import com.xtdstudios.logger.LoggerFactory;
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
@@ -9,6 +12,8 @@ package com.xtdstudios.cache
 	
 	dynamic public class CacheManager extends Proxy implements IEventDispatcher
 	{
+		private static var log: Logger = LoggerFactory.getLogger(CacheManager);
+		
 		protected var eventDispatcher:EventDispatcher;
 		protected var m_hash			: Dictionary;
 		protected var m_list			: Array;
@@ -25,7 +30,7 @@ package com.xtdstudios.cache
 		
 		public function store(key: Object, value: *): void
 		{
-			//trace("CacheManager.store: key=", key," , value=", value);
+			log.debug("store: key=" + key + " , value=" + value);
 			if (cachePolicy.beforeStore(this, key, value))
 			{
 				var oldValue : * = remove(key);
@@ -38,7 +43,7 @@ package com.xtdstudios.cache
 		
 		public function fetch(key: Object): *
 		{
-//			trace("CacheManager.fetch: key=", key);
+			log.debug("fetch: key=" + key);
 			return m_hash[key];
 		}
 		
