@@ -1,3 +1,18 @@
+/*
+Copyright 2013 XTD Studios Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package com.xtdstudios.cache
 {
 	import com.xtdstudios.logger.Logger;
@@ -50,7 +65,7 @@ package com.xtdstudios.cache
 		public function remove(key: Object): *
 		{
 			var value : * = m_hash[key];
-			//trace("CacheManager.remove: key=", key," , value=", value);
+			log.debug("remove: key=" + key + " , value=" + value);
 			if (cachePolicy.beforeRemove(this, key, value))
 			{
 				delete m_hash[key];
@@ -63,7 +78,7 @@ package com.xtdstudios.cache
 		
 		public function removeOldest(): *
 		{
-//			trace("CacheManager.store: Cache full - deleting old items.");
+			log.debug("store: Cache full - deleting old items.");
 			return remove(m_list[0]);
 		}
 		
