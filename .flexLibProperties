@@ -12,6 +12,9 @@
     <classEntry path="com.xtdstudios.cache.MemoryLimitCachePolicy"/>
     <classEntry path="com.xtdstudios.cache.ItemMemorySize"/>
     <classEntry path="com.xtdstudios.cache.CachePolicy"/>
+    <classEntry path="com.xtdstudios.logger.LoggerFactory"/>
+    <classEntry path="com.xtdstudios.logger.LogPattern"/>
+    <classEntry path="com.xtdstudios.logger.SimpleLogPattern"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

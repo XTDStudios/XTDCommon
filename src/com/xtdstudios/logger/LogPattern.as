@@ -13,13 +13,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.xtdstudios.cache
+package com.xtdstudios.logger
 {
-	public interface CachePolicy
+	public interface LogPattern
 	{
-		function beforeStore(cacheManager: CacheManager, key: Object, value: *): Boolean;
-		function afterStore(cacheManager: CacheManager, key: Object, value: *, oldValue : *): void;
-		function beforeRemove(cacheManager: CacheManager, key: Object, value: *): Boolean;
-		function afterRemove(cacheManager: CacheManager, key: Object, value: *): void;
+		function formatLogMessage(classNameToLog: String, logLevel: LoggerLevel, message: String): String
 	}
 }

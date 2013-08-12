@@ -1,5 +1,23 @@
+/*
+Copyright 2013 XTD Studios Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package com.xtdstudios.cache
 {
+	import com.xtdstudios.logger.Logger;
+	import com.xtdstudios.logger.LoggerFactory;
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
@@ -9,6 +27,8 @@ package com.xtdstudios.cache
 	
 	dynamic public class CacheManager extends Proxy implements IEventDispatcher
 	{
+		private static var log: Logger = LoggerFactory.getLogger(CacheManager);
+		
 		protected var eventDispatcher:EventDispatcher;
 		protected var m_hash			: Dictionary;
 		protected var m_list			: Array;
@@ -25,7 +45,7 @@ package com.xtdstudios.cache
 		
 		public function store(key: Object, value: *): void
 		{
-			//trace("CacheManager.store: key=", key," , value=", value);
+			log.debug("store: key=" + key + " , value=" + value);
 			if (cachePolicy.beforeStore(this, key, value))
 			{
 				var oldValue : * = remove(key);
@@ -38,14 +58,14 @@ package com.xtdstudios.cache
 		
 		public function fetch(key: Object): *
 		{
-//			trace("CacheManager.fetch: key=", key);
+			log.debug("fetch: key=" + key);
 			return m_hash[key];
 		}
 		
 		public function remove(key: Object): *
 		{
 			var value : * = m_hash[key];
-			//trace("CacheManager.remove: key=", key," , value=", value);
+			log.debug("remove: key=" + key + " , value=" + value);
 			if (cachePolicy.beforeRemove(this, key, value))
 			{
 				delete m_hash[key];
@@ -58,7 +78,7 @@ package com.xtdstudios.cache
 		
 		public function removeOldest(): *
 		{
-//			trace("CacheManager.store: Cache full - deleting old items.");
+			log.debug("store: Cache full - deleting old items.");
 			return remove(m_list[0]);
 		}
 		
