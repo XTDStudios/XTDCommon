@@ -22,5 +22,6 @@ package com.xtdstudios.logger
 		function info(message: String): void
 		function warn(message: String): void
 		function error(message: String): void
+		function get loggerName(): String
 	}
 }

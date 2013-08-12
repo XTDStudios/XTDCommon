@@ -84,7 +84,7 @@ package com.xtdstudios.logger
 		
 		public function shouldLog(classNameToLog: String, loggerLevel: LoggerLevel): Boolean
 		{
-			if (getFilter(classNameToLog) == loggerLevel)
+			if (getFilter(classNameToLog).Index >= loggerLevel.Index)
 			{
 				return true;
 			}

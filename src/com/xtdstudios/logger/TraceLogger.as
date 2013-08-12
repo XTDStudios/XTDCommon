@@ -42,6 +42,10 @@ package com.xtdstudios.logger
 			return false
 		}
 		
+		public function get loggerName(): String
+		{
+			return classNameToLog;
+		}
 		
 		public function debug(message: String): void
 		{
