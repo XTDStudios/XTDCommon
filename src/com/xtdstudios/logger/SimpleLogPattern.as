@@ -23,11 +23,8 @@ package com.xtdstudios.logger
 		
 		public function formatLogMessage(classNameToLog: String, logLevel: LoggerLevel, message: String): String
 		{
-			var date: Date = new Date();
-			var dateStr : String =  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear() + " " +  date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"."+date.getMilliseconds();
-			//				var messageStr:String = "{0} [{1}] {2} - {3}";
-			//				trace(StringUtil.substitute(messageStr, dateStr, level, classNameToLog, message));
-			return dateStr + " [" + logLevel + "] " + classNameToLog + " - " + message;
+			classNameToLog = classNameToLog.substr(classNameToLog.indexOf("::")+2);
+			return classNameToLog + " - " + message;
 		}
 	}
 }

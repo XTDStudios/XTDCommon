@@ -15,6 +15,7 @@
     <classEntry path="com.xtdstudios.logger.LoggerFactory"/>
     <classEntry path="com.xtdstudios.logger.LogPattern"/>
     <classEntry path="com.xtdstudios.logger.SimpleLogPattern"/>
+    <classEntry path="com.xtdstudios.logger.DetailedLogPattern"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
