@@ -22,6 +22,11 @@ package com.xtdstudios.common.assetsLoader
 			return null;
 		}
 		
+		public function hasAssetClass(symbol:String):Boolean
+		{
+			return true;
+		}
+		
 		public function getAvailableAssetsNames():Vector.<String>
 		{
 			return null;

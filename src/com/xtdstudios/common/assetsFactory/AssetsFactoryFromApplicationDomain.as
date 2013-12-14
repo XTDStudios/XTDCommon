@@ -12,6 +12,19 @@ package com.xtdstudios.common.assetsFactory
 			m_applicationDomain = applicationDomain;
 		}
 		
+		public function hasAsset(symbol:String):Boolean
+		{
+			if (m_applicationDomain)
+			{
+				return m_applicationDomain.hasDefinition(symbol);
+			}
+			else
+			{
+				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromApplicationDomain constructor");
+				return null;
+			}
+		}
+		
 		public function getAssetClass(className:String):Class
 		{
 			if (m_applicationDomain)
@@ -21,7 +34,7 @@ package com.xtdstudios.common.assetsFactory
 			}
 			else
 			{
-				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromApplicationDomain");
+				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromApplicationDomain constructor");
 				return null;
 			}
 		}

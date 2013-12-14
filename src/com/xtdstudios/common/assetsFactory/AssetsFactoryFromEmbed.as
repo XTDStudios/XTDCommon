@@ -11,16 +11,29 @@ package com.xtdstudios.common.assetsFactory
 			m_objectWithEmbeds = objectWithEmbeds;
 		}
 		
+		public function hasAsset(symbol:String):Boolean
+		{
+			if (m_objectWithEmbeds)
+			{
+				return m_objectWithEmbeds.hasOwnProperty(symbol);
+			}
+			else
+			{
+				new IllegalOperationError("objectWithEmbeds was not set in the AssetsFactoryFromEmbed constructor");
+				return null;
+			}
+		}
+		
 		public function getAssetClass(className:String):Class
 		{
 			if (m_objectWithEmbeds)
 			{
-				var classDef : Class = m_objectWithEmbeds.getAssetClass(className);
+				var classDef : Class = m_objectWithEmbeds[className];
 				return classDef;
 			}
 			else
 			{
-				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromAssetsLoader");
+				new IllegalOperationError("objectWithEmbeds was not set in the AssetsFactoryFromEmbed constructor");
 				return null;
 			}
 		}

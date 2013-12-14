@@ -163,6 +163,11 @@ package com.xtdstudios.common.assetsLoader
 			return m_applicationDomain.getQualifiedDefinitionNames();
 		}
 
+		public function hasAssetClass(symbol:String):Boolean
+		{
+			return m_applicationDomain.hasDefinition(symbol);	
+		}
+		
 		public function getAssetClass(symbol:String):Class
 		{
 			return m_applicationDomain.getDefinition(symbol) as Class;

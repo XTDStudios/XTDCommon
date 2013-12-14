@@ -13,6 +13,19 @@ package com.xtdstudios.common.assetsFactory
 			m_assetsLoader = assetsLoader;
 		}
 		
+		public function hasAsset(symbol:String):Boolean
+		{
+			if (m_assetsLoader)
+			{
+				return m_assetsLoader.hasAssetClass(symbol);
+			}
+			else
+			{
+				new IllegalOperationError("applicationDomain was not set on AssetsFactoryFromAssetsLoader");
+				return null;
+			}
+		}
+		
 		public function getAssetClass(className:String):Class
 		{
 			if (m_assetsLoader)

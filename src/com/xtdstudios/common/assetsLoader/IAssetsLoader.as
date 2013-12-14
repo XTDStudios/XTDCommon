@@ -16,10 +16,10 @@ limitations under the License.
 package com.xtdstudios.common.assetsLoader
 {
 	import flash.events.IEventDispatcher;
-	import flash.system.ApplicationDomain;
 
 	public interface IAssetsLoader extends IEventDispatcher
 	{
+		function hasAssetClass(symbol:String):Boolean;
 		function getAssetClass(symbol:String):Class;
 		function getAvailableAssetsNames():Vector.<String>;
 		function initializeAllAssets():void;
