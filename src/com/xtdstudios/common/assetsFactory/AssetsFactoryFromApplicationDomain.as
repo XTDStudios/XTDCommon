@@ -43,8 +43,6 @@ package com.xtdstudios.common.assetsFactory
 		{
 			if (m_applicationDomain)
 			{
-				trace(m_applicationDomain.getQualifiedDefinitionNames());
-				
 				var definition : Object = m_applicationDomain.getDefinition(symbol);
 				if (definition is Class)
 				{

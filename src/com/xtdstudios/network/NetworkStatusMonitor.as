@@ -45,7 +45,6 @@ package com.xtdstudios.network
 		}
 		
 		public function testConnectionNow():void {
-			trace(m_monitor.available);
 			m_monitor.stop();
 			m_monitor.start();
 		}
