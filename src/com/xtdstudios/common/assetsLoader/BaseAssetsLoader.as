@@ -35,7 +35,7 @@ package com.xtdstudios.common.assetsLoader
 		
 		public function BaseAssetsLoader()
 		{
-			m_applicationDomain = ApplicationDomain.currentDomain;
+			m_applicationDomain = new ApplicationDomain();
 			m_assetsLoadingProgress = 0.0;
 			m_inProgress = false;
 			m_assetsReady = false;
