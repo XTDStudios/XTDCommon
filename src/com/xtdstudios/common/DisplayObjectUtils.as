@@ -31,7 +31,7 @@ package com.xtdstudios.common
 		/**
 		 * Calculates the given dispObj bounds rect. with all its children (Including effects)
 		 * The result rect will reflect how this display object looks like to its parent.
-		 * Meanning that it's also taking the object's location, rotation, and scale
+		 * Meaning that it's also taking the object's location, rotation, and scale
 		 *  
 		 * @param dispObj
 		 * @return 
@@ -175,7 +175,7 @@ package com.xtdstudios.common
 			return matrix;
 		}
 		
-		public static function isIdentmatrix(mat:Matrix):Boolean
+		public static function isIdentMatrix(mat:Matrix):Boolean
 		{
 			return (mat.a==1) &&
 				   (mat.b==0) &&
@@ -205,7 +205,7 @@ package com.xtdstudios.common
 			var effects : Array = dispObj.filters;
 			if (effects!=null && effects.length>0) 
 			{
-				var newEffects : Array = new Array();
+				var newEffects : Array = [];
 				for (var j:int=0; j<effects.length; j++)
 				{
 					var effect 		: BitmapFilter = effects[j];
