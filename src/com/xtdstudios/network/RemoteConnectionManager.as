@@ -25,7 +25,7 @@ public class RemoteConnectionManager extends URLLoader {
         return m_requestId;
     }
 
-    public function addRequestHeader(h:URLRequestHeader) {
+    public function addRequestHeader(h:URLRequestHeader):void {
         if (requestHeaders == null) {
             requestHeaders = new Array();
         }
@@ -50,11 +50,11 @@ public class RemoteConnectionManager extends URLLoader {
     }
 
     private function prepareRequestHeaders(request:URLRequest, additinalRequestHeaders:Array):void {
-        for (var h:URLRequestHeader in requestHeaders) {
-            request.requestHeaders.push(h);
+        for (var h1:URLRequestHeader in requestHeaders) {
+            request.requestHeaders.push(h1);
         }
-        for (var h:URLRequestHeader in additinalRequestHeaders) {
-            request.requestHeaders.push(h);
+        for (var h2:URLRequestHeader in additinalRequestHeaders) {
+            request.requestHeaders.push(h2);
         }
     }
 
