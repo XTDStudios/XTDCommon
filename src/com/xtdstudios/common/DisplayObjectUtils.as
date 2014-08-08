@@ -45,25 +45,25 @@ package com.xtdstudios.common
 			{
 				if (dispObj.parent!=null)
 				{
-					bounds = doGetBoundsRectWithChidren(dispObj, dispObj.parent);
+					bounds = doGetBoundsRectWithChildren(dispObj, dispObj.parent);
 				}
 				else
 				{
 					var fakeParent : Sprite = new Sprite();
 					fakeParent.addChild(dispObj);
-					bounds = doGetBoundsRectWithChidren(dispObj, fakeParent);
+					bounds = doGetBoundsRectWithChildren(dispObj, fakeParent);
 					fakeParent.removeChild(dispObj);
 				}
 			}
 			else
 			{
-				bounds = doGetBoundsRectWithChidren(dispObj, targetCoordinateSpace);
+				bounds = doGetBoundsRectWithChildren(dispObj, targetCoordinateSpace);
 			}
 			
 			return bounds;
 		}
 		
-		private static function doGetBoundsRectWithChidren(dispObj:DisplayObject, targetCoordinateSpace:DisplayObject):Rectangle
+		private static function doGetBoundsRectWithChildren(dispObj:DisplayObject, targetCoordinateSpace:DisplayObject):Rectangle
 		{
 			var children			: Array = [];
 			var child				: DisplayObject;
@@ -76,14 +76,23 @@ package com.xtdstudios.common
 			// remove and draw rect for all children
 			if (dispObjCont && dispObjCont.filters.length==0)
 			{
-				for (i=0; i<dispObjCont.numChildren; i++)
+				if (dontRemoveChildren)
 				{
-					child = dispObjCont.getChildAt(i);
-					childrensRect = childrensRect.union(doGetBoundsRectWithChidren(child, targetCoordinateSpace));
-					childrensRect = childrensRect.union(getBoundsWithEffects(child, targetCoordinateSpace));
-					
-					if (dontRemoveChildren==false)
+					for (i=0; i<dispObjCont.numChildren; i++)
 					{
+						child = dispObjCont.getChildAt(i);
+						childrensRect = childrensRect.union(doGetBoundsRectWithChildren(child, targetCoordinateSpace));
+						childrensRect = childrensRect.union(getBoundsWithEffects(child, targetCoordinateSpace));
+					}
+				}
+				else
+				{
+					while (dispObjCont.numChildren>0)
+					{
+						child = dispObjCont.getChildAt(0);
+						childrensRect = childrensRect.union(doGetBoundsRectWithChildren(child, targetCoordinateSpace));
+						childrensRect = childrensRect.union(getBoundsWithEffects(child, targetCoordinateSpace));
+
 						dispObjCont.removeChildAt(0);
 						children.push(child);
 					}
