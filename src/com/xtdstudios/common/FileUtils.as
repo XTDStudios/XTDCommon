@@ -31,29 +31,32 @@ package com.xtdstudios.common
 		
 		public static function getCacheDir():File
 		{
-			if (!m_cacheDir)
-			{
-				var os : String = Capabilities.os.toLowerCase();
-				
-				if (os.indexOf("windows") >= 0)		// windows
-				{
-					m_cacheDir = File.applicationStorageDirectory;
-				}
-				else if (os.indexOf("mac") >= 0)	// Macintosh
-				{
-					m_cacheDir = File.applicationStorageDirectory;
-				} 
-				else if (os.indexOf("linux") >= 0)	// Android
-				{
-					m_cacheDir = File.applicationStorageDirectory;
-				}
-				else if (os.indexOf("iphone") >= 0)	// iPhone/iPad
-				{
-					m_cacheDir = new File(File.applicationDirectory.nativePath +"/\.\./Library/Caches");
-				}
-			}
-			
-			return m_cacheDir;
+			return File.cacheDirectory;
+
+			// As of AIR 3.6, this is not required anymore
+//			if (!m_cacheDir)
+//			{
+//				var os : String = Capabilities.os.toLowerCase();
+//
+//				if (os.indexOf("windows") >= 0)		// windows
+//				{
+//					m_cacheDir = File.applicationStorageDirectory;
+//				}
+//				else if (os.indexOf("mac") >= 0)	// Macintosh
+//				{
+//					m_cacheDir = File.applicationStorageDirectory;
+//				}
+//				else if (os.indexOf("linux") >= 0)	// Android
+//				{
+//					m_cacheDir = File.applicationStorageDirectory;
+//				}
+//				else if (os.indexOf("iphone") >= 0)	// iPhone/iPad
+//				{
+//					m_cacheDir = new File(File.applicationDirectory.nativePath +"/\.\./Library/Caches");
+//				}
+//			}
+//
+//			return m_cacheDir;
 		}
 		
 		public static function getTempDir():File
