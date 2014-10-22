@@ -20,16 +20,17 @@ package com.xtdstudios.common.assetsLoader
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 
 	public class AssetsLoaderFromExternalURL extends BaseAssetsLoader
 	{
 		private var m_filesURLs				: Vector.<String>;
 		
-		public function AssetsLoaderFromExternalURL(filesURLs : Vector.<String>)
+		public function AssetsLoaderFromExternalURL(filesURLs : Vector.<String>, customApplicationDomain:ApplicationDomain = null)
 		{
 			m_filesURLs = filesURLs;
-			super();
+			super(customApplicationDomain);
 		}		
 		
 		override public function initializeAllAssets():void
@@ -37,7 +38,7 @@ package com.xtdstudios.common.assetsLoader
 			super.initializeAllAssets();
 			
 			// the loader
-			m_countCompelted = 0;
+			m_countCompleted = 0;
 			m_assetsReady = false;
 			m_assetsLoadingProgress = 0.0;
 			for each(var fileURL:String in m_filesURLs)

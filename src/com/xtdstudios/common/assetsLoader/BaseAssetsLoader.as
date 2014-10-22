@@ -31,11 +31,14 @@ package com.xtdstudios.common.assetsLoader
 		protected var m_applicationDomain 		: ApplicationDomain;
 		protected var m_assetsReady				: Boolean;
 		protected var m_assetsLoadingProgress	: Number;
-		protected var m_countCompelted			: int;
+		protected var m_countCompleted			: int;
 		
-		public function BaseAssetsLoader()
+		public function BaseAssetsLoader(customApplicationDomain:ApplicationDomain = null)
 		{
-			m_applicationDomain = new ApplicationDomain();
+			if (customApplicationDomain)
+				m_applicationDomain = customApplicationDomain;
+			else
+				m_applicationDomain = new ApplicationDomain();
 			m_assetsLoadingProgress = 0.0;
 			m_inProgress = false;
 			m_assetsReady = false;
@@ -104,8 +107,8 @@ package com.xtdstudios.common.assetsLoader
 		
 		private function onComplete(event:Event):void
 		{
-			m_countCompelted++;
-			if (m_countCompelted==m_loaders.length)
+			m_countCompleted++;
+			if (m_countCompleted==m_loaders.length)
 			{
 				// remove all the loaders
 				while (m_loaders.length>0)

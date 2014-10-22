@@ -16,6 +16,7 @@ limitations under the License.
 package com.xtdstudios.common.assetsLoader
 {
 	import flash.display.Loader;
+	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
 
@@ -23,10 +24,10 @@ package com.xtdstudios.common.assetsLoader
 	{
 		protected var m_byteArrays		: Vector.<ByteArray>;
 		
-		public function AssetsLoaderFromByteArray(byteArrays : Vector.<ByteArray>)
+		public function AssetsLoaderFromByteArray(byteArrays : Vector.<ByteArray>, customApplicationDomain:ApplicationDomain = null)
 		{
 			m_byteArrays = byteArrays;
-			super();
+			super(customApplicationDomain);
 		}		
 		
 		override public function initializeAllAssets():void
@@ -34,7 +35,7 @@ package com.xtdstudios.common.assetsLoader
 			super.initializeAllAssets();
 			
 			// the loader
-			m_countCompelted = 0;
+			m_countCompleted = 0;
 			m_assetsReady = false;
 			m_assetsLoadingProgress = 0.0;
 			for each(var byteArray:ByteArray in m_byteArrays)
