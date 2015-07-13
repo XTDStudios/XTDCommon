@@ -1,5 +1,7 @@
 package com.xtdstudios.common
 {
+	import com.xtdstudios.utils.ConstructorValidator;
+	
 	import flash.system.Capabilities;
 
 	/**
@@ -14,8 +16,10 @@ package com.xtdstudios.common
 	{
 		private static var counter:Number = 0;
 		
-		function GUID(){
-			
+		protected static function get AbstractUnLock(): Lock { return _abstractLock }
+		function GUID(Abstract:Lock, Error:*="Can not instantiate GUID class")
+		{
+			ConstructorValidator(Abstract, Error);
 		}
 		
 		public static function create():String {
@@ -102,3 +106,6 @@ package com.xtdstudios.common
 		}
 	}
 }
+
+internal class Lock {}
+internal const _abstractLock: Lock = new Lock;
