@@ -13,3 +13,4 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /bin-release-temp
 /*.iml
+/.idea
