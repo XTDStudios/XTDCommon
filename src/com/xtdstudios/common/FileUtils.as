@@ -31,7 +31,7 @@ package com.xtdstudios.common
 		
 		public static function getCacheDir():File
 		{
-			return File.cacheDirectory;
+			return File.applicationStorageDirectory;
 
 			// As of AIR 3.6, this is not required anymore
 //			if (!m_cacheDir)
