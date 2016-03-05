@@ -101,6 +101,15 @@ package com.xtdstudios.common.fastInjection
 			}
 		}
 		
+		public function getInjectable(injectedAs:String):Object
+		{
+			if (m_injectables[injectedAs]!=null)
+			{
+				return m_injectables[injectedAs];
+			}
+			return null;
+		}
+
 		private function processInjections(injectInto:Object):void
 		{
 			for (var injectedAs:String in m_injectables)
