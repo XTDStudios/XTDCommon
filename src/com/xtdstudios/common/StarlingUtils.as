@@ -2,7 +2,8 @@
  * Created by gil on 05/10/2015.
  */
 package com.xtdstudios.common {
-import starling.core.Starling;
+import flash.system.Capabilities;
+
 import starling.display.DisplayObject;
 
 import flash.display3D.Context3DProfile;
@@ -24,5 +25,11 @@ public class StarlingUtils {
       profile == Context3DProfile.STANDARD_CONSTRAINED ||
       profile == Context3DProfile.STANDARD_EXTENDED;
   }
+
+  public static function get isMobile() : Boolean
+  {
+      return Capabilities.manufacturer.indexOf("iOS") > -1 || Capabilities.manufacturer.indexOf("Android") > -1;
+  }
+
 }
 }
